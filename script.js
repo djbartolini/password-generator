@@ -7,6 +7,11 @@ function generatePassword () {
   var isLowerCase = confirm("Would you like to use lowercase letters?");
   var isSpecial = confirm("Would you like to use special characters?");
   var isNumber = confirm("Would you like to use numbers?");
+  var passLength = prompt("How many characters would you like to use?");
+
+  while (passLength < 8 || passLength > 128) {
+    passLength = prompt("Must be 8 to 128 characters");
+  }
 
   var possibleSpecial = "!#$%&()*+,-./:;<=>?@[]^_`{|}~";
   var letters = "abcdefghijklmnopqrstuvwxyz";
@@ -14,7 +19,7 @@ function generatePassword () {
 
 
   if (isUpperCase) {
-    //use uppercase
+    //
   }
 
   if (isLowerCase) {
