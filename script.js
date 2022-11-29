@@ -3,6 +3,7 @@ var generateBtn = document.querySelector("#generate");
 
 function generatePassword () {
   // Your code goes here
+  var passwordPool = "";
   var isUpperCase = confirm("Would you like to use uppercase letters?");
   var isLowerCase = confirm("Would you like to use lowercase letters?");
   var isSpecial = confirm("Would you like to use special characters?");
@@ -16,12 +17,16 @@ function generatePassword () {
     passLength = prompt("Must be 8 to 128 characters");
   }
 
+
   if (isUpperCase) {
     var getUppercase = function() {
       return letters.toUpperCase()[Math.floor(Math.random() * letters.length)];
     }
+    passwordPool = passwordPool.concat(letters);
     console.log(getUppercase());
+    console.log(passwordPool);
   }
+  
   
   if (isLowerCase) {
     var getLowercase = function() {
@@ -42,11 +47,6 @@ function generatePassword () {
       return numbers[Math.floor(Math.random() * numbers.length)];
     }
     console.log(getNumber());
-  }
-  return "";
-
-  var getPassword = function() {
-    var passwordLength = +passlength.value;
   }
 }
 
