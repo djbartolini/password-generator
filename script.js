@@ -3,7 +3,7 @@ var generateBtn = document.querySelector("#generate");
 var specials = "!#$%&()*+,-./:;<=>?@[]^_`{|}~";
 var letters = "abcdefghijklmnopqrstuvwxyz";
 var numbers = "0987654321";
-//var passwordPool = "";
+// var noPassword = "You must choose at lease 1 character type!";
 
 function getPasswordOptions () {
   // Your code goes here
@@ -16,6 +16,9 @@ function getPasswordOptions () {
   while (passLength < 8 || passLength > 128) {
     passLength = prompt("Must be 8 to 128 characters");
   }
+
+  // user inputs are stored as an object
+
   var passwordOptions = {
     passLength: parseInt(passLength),
     isUpperCase: isUpperCase,
@@ -28,13 +31,14 @@ function getPasswordOptions () {
 
 var generatePassword = function() {
   var options = getPasswordOptions();
-  var passwordPool = "";
 
+  var passwordPool = ""; // empty strings to concatenate onto as the conditionals below run
   var possibleCharacters = "";
-
   var guaranteedCharacters = "";
+  var noPassword = "No password generated. You must choose at least 1 character type!";
 
-  if (!options) return null;
+
+  if (!options.isUpperCase && !options.isLowerCase && !options.isSpecial && !options.isNumber) return noPassword; // if user made no 
 
   if (options.isUpperCase) {
     possibleCharacters = possibleCharacters.concat(letters.toUpperCase());
@@ -55,6 +59,7 @@ var generatePassword = function() {
     possibleCharacters = possibleCharacters.concat(numbers);
     guaranteedCharacters = guaranteedCharacters.concat(numbers[Math.floor(Math.random() * numbers.length)]);
   }
+
 
   for (var i = 0; i < options.passLength; i++) {
   passwordPool = passwordPool.concat(possibleCharacters[Math.floor(Math.random() * possibleCharacters.length)]);
