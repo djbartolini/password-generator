@@ -16,9 +16,7 @@ function getPasswordOptions () {
     passLength = prompt("Must be 8 to 128 characters");
   }
 
-  // user inputs are stored as an object
-
-  var passwordOptions = {
+  var passwordOptions = {   // user inputs are stored as an object
     passLength: parseInt(passLength),
     isUpperCase: isUpperCase,
     isLowerCase: isLowerCase,
