@@ -17,52 +17,13 @@ function getPasswordOptions () {
     passLength = prompt("Must be 8 to 128 characters");
   }
   var passwordOptions = {
-    passLength: passLength,
+    passLength: parseInt(passLength),
     isUpperCase: isUpperCase,
     isLowerCase: isLowerCase,
     isSpecial: isSpecial,
     isNumber: isNumber
   }
   return passwordOptions;
-
-  //console.log(passwordOptions);
-
-  // if (isUpperCase) {
-  //   var getUppercase = function() {
-  //     return letters.toUpperCase()[Math.floor(Math.random() * letters.length)];
-  //   }
-  //   // passwordPool = passwordPool.concat(letters);
-  //   passwordPool = passwordPool.toUpperCase();
-  //   // console.log(getUppercase());
-  //   // console.log(passwordPool);
-  // }
-  
-  // if (isLowerCase) {
-  //   var getLowercase = function() {
-  //     return letters[Math.floor(Math.random() * letters.length)]; 
-  //   }
-  //   // passwordPool = passwordPool.concat(letters);
-  //   // console.log(getLowercase());
-  //   // console.log(passwordPool);
-  // }
-
-  // if (isSpecial) {
-  //   var getSpecial = function() {
-  //     return specials[Math.floor(Math.random() * specials.length)];
-  //   }
-  //   // passwordPool = passwordPool.concat(specials);
-  //   // console.log(getSpecial());
-  //   // console.log(passwordPool);
-  // }
-
-  // if (isNumber) {
-  //   var getNumber = function() {
-  //     return numbers[Math.floor(Math.random() * numbers.length)];
-  //   }
-  //   // passwordPool = passwordPool.concat(numbers);
-  //   // console.log(getNumber());
-  //   // console.log(passwordPool);
-  // }
 }
 
 var generatePassword = function() {
@@ -71,33 +32,36 @@ var generatePassword = function() {
 
   var possibleCharacters = "";
 
-  var guaranteedCharacters = [];
+  var guaranteedCharacters = "";
 
   if (!options) return null;
 
   if (options.isUpperCase) {
     possibleCharacters = possibleCharacters.concat(letters.toUpperCase());
-    //guaranteedCharacters.push(letters.toUpperCase());
+    guaranteedCharacters = guaranteedCharacters.concat(letters.toUpperCase()[Math.floor(Math.random() * letters.length)]);
   }
 
   if (options.isLowerCase) {
     possibleCharacters = possibleCharacters.concat(letters);
-    // guaranteedCharacters.push(letters);
+    guaranteedCharacters=  guaranteedCharacters.concat(letters[Math.floor(Math.random() * letters.length)]);
   }
 
   if (options.isSpecial) {
     possibleCharacters = possibleCharacters.concat(specials);
-    // guaranteedCharacters.push(specials);
+    guaranteedCharacters = guaranteedCharacters.concat(specials[Math.floor(Math.random() * specials.length)]);
   }
 
   if (options.isNumber) {
     possibleCharacters = possibleCharacters.concat(numbers);
-    // guaranteedCharacters.push(numbers);
+    guaranteedCharacters = guaranteedCharacters.concat(numbers[Math.floor(Math.random() * numbers.length)]);
   }
 
   for (var i = 0; i < options.passLength; i++) {
   passwordPool = passwordPool.concat(possibleCharacters[Math.floor(Math.random() * possibleCharacters.length)]);
   }
+
+  passwordPool = passwordPool.substring(guaranteedCharacters.length).concat(guaranteedCharacters);
+
   return passwordPool;
 }
 
